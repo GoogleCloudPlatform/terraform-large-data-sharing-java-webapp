@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,15 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PROJECT_ID=$1
+PROJECT_ID=$(gcloud config get-value project)
+PROJECT_NUMBER=$(gcloud projects list --filter="$PROJECT_ID" --format="value(PROJECT_NUMBER)")
 
-BUCKET_NAME=tf-backend-lds-`gcloud projects list --filter PROJECT_ID=$PROJECT_ID --format="value(projectNumber)"`
+gcloud config set project $PROJECT_ID
 
-gcloud storage buckets describe gs://$BUCKET_NAME
-status=$?
-if [ $status -eq 0 ]; then
-  echo "bucket exists. Removing all files and deleting bucket."
-  gcloud storage rm -r gs://$BUCKET_NAME
-else
-  echo "bucket does not exist."
-fi
+gcloud services enable cloudresourcemanager.googleapis.com
