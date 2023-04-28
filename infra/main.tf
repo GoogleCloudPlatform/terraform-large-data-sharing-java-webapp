@@ -91,6 +91,7 @@ resource "google_project_iam_member" "cloudrun" {
     "roles/storage.objectAdmin",
     "roles/datastore.user",
     "roles/compute.networkUser",
+    "roles/cloudtrace.agent",
   ])
   project = var.project_id
   role    = each.key
