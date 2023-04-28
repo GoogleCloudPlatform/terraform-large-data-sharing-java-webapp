@@ -24,7 +24,8 @@ steps:
 
   - id: build-and-push-backend-docker-image
     dir: ${_APP_REPO_NAME}/api
-    name: 'gcr.io/cloud-builders/mvn'
+    name: 'maven'
+    entrypoint: 'mvn'
     waitFor: ['clone-repo']
     env: ['LDS_IMAGE_NAME=gcr.io/${PROJECT_ID}/${_BACKEND_IMAGE_REPO_NAME}:${_IMAGE_TAG}']
     args: ['compile', 'com.google.cloud.tools:jib-maven-plugin:3.3.1:build']
