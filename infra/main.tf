@@ -27,7 +27,8 @@ module "project_services" {
     "cloudresourcemanager.googleapis.com",
     "firestore.googleapis.com",
     "vpcaccess.googleapis.com",
-    "monitoring.googleapis.com"
+    "monitoring.googleapis.com",
+    "cloudtrace.googleapis.com",
   ]
 }
 
