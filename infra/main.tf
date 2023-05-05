@@ -36,7 +36,7 @@ data "google_project" "project" {}
 
 locals {
   resource_path = "resource"
-  firestore     = length(var.firestore_collection_id) == 0 ? "fileMetadata" : var.firestore_collection_id
+  firestore     = length(var.firestore_collection_id) == 0 ? "fileMetadata-cdn-java" : var.firestore_collection_id
   collection_fields = {
     "${local.firestore}" = [
       {
@@ -60,7 +60,7 @@ module "storage" {
   project_id = var.project_id
   location   = var.bucket_location
   labels     = var.labels
-  name       = "lds-resource-${data.google_project.project.number}"
+  name       = "lds-resource-${data.google_project.project.number}-java"
 }
 
 module "networking" {
@@ -89,7 +89,7 @@ resource "random_id" "random_code" {
 }
 
 resource "google_service_account" "cloudrun" {
-  account_id = "cloudrun-${random_id.random_code.hex}"
+  account_id = "cloudrun-${random_id.random_code.hex}-java"
 }
 
 resource "google_project_iam_member" "cloudrun" {
@@ -112,7 +112,7 @@ module "cloud_run_server" {
 
   project_id      = var.project_id
   location        = var.region
-  cloud_run_name  = "lds-server"
+  cloud_run_name  = "lds-server-java"
   cloud_run_image = var.lds_server_image
   limits = {
     cpu    = "2000m"
@@ -165,7 +165,7 @@ module "cloud_run_client" {
 
   project_id      = var.project_id
   location        = var.region
-  cloud_run_name  = "lds-client"
+  cloud_run_name  = "lds-client-java"
   cloud_run_image = var.lds_client_image
   limits = {
     cpu    = "1000m"
