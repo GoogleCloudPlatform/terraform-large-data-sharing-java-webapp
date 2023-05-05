@@ -84,3 +84,9 @@ variable "labels" {
     app = "large-data-sharing"
   }
 }
+
+variable "firestore_collection_id" {
+  description = "Firestore collection id"
+  type        = string
+  default     = "fileMetadata"
+}
