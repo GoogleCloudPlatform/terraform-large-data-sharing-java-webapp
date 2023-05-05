@@ -36,6 +36,19 @@ data "google_project" "project" {}
 
 locals {
   resource_path = "resource"
+  firestore     = length(var.firestore_collection_id) == 0 ? "fileMetadata" : var.firestore_collection_id
+  collection_fields = {
+    "${local.firestore}" = [
+      {
+        field_path   = "tags"
+        array_config = "CONTAINS"
+      },
+      {
+        field_path = "orderNo"
+        order      = "DESCENDING"
+      },
+    ]
+  }
 }
 
 module "storage" {
@@ -66,8 +79,9 @@ module "firestore" {
   ]
   source = "./modules/firestore"
 
-  project_id = var.project_id
-  init       = var.init
+  project_id        = var.project_id
+  init              = var.init
+  collection_fields = local.collection_fields
 }
 
 resource "random_id" "random_code" {
@@ -130,6 +144,10 @@ module "cloud_run_server" {
     {
       name  = "LDS_RESOURCE_PATH"
       value = "/${local.resource_path}"
+    },
+    {
+      name  = "LDS_FIRESTORE"
+      value = "${local.firestore}"
     },
   ]
   ingress                 = "INGRESS_TRAFFIC_INTERNAL_ONLY"
