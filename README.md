@@ -23,7 +23,7 @@ The resources/services/activations/deletions that this module will create/trigge
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| bucket\_location | Bucket location. <https://cloud.google.com/storage/docs/locations> | `string` | `"US"` | no |
+| bucket\_location | Bucket location. https://cloud.google.com/storage/docs/locations | `string` | `"US"` | no |
 | disable\_services\_on\_destroy | Whether project services will be disabled when the resources are destroyed. | `bool` | `false` | no |
 | init | Initialize resource or not | `bool` | `true` | no |
 | labels | A map of key/value label pairs to assign to the resources. | `map(string)` | <pre>{<br>  "app": "large-data-sharing"<br>}</pre> | no |
