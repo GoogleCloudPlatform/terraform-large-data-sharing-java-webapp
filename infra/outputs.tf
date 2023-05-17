@@ -25,6 +25,6 @@ output "bucket_name" {
 }
 
 output "neos_walkthrough_url" {
-  description = "Neos Tutorial URL"
-  value       = "https://console.cloud.google.com/products/solutions/deployments?walkthrough_id=solutions-in-console--large-data-sharing--large-data-sharing-java_tour"
+  description = "Neos Tutorial URL"
+  value       = "https://console.cloud.google.com/products/solutions/deployments?walkthrough_id=solutions-in-console--large-data-sharing--large-data-sharing-java_tour"
 }
