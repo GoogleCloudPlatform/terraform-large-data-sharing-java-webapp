@@ -19,7 +19,17 @@ output "lb_external_ip" {
   value       = module.load_balancer.lb_external_ip
 }
 
+output "backend_bucket_name" {
+  description = "The name of the backend bucket used for Cloud CDN"
+  value       = module.load_balancer.backend_bucket_name
+}
+
 output "bucket_name" {
   description = "Bucket name"
   value       = module.storage.bucket_name
+}
+
+output "neos_walkthrough_url" {
+  description = "Neos Tutorial URL"
+  value       = "https://console.cloud.google.com/products/solutions/deployments?walkthrough_id=solutions-in-console--large-data-sharing--large-data-sharing-java_tour"
 }
