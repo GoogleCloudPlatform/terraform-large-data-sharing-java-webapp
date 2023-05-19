@@ -27,7 +27,8 @@ module "project_services" {
     "cloudresourcemanager.googleapis.com",
     "firestore.googleapis.com",
     "vpcaccess.googleapis.com",
-    "monitoring.googleapis.com"
+    "monitoring.googleapis.com",
+    "cloudtrace.googleapis.com",
   ]
 }
 
@@ -39,6 +40,19 @@ data "google_project" "project" {
 
 locals {
   resource_path = "resource"
+  firestore     = length(var.firestore_collection_id) == 0 ? "fileMetadata-cdn-java" : var.firestore_collection_id
+  collection_fields = {
+    "${local.firestore}" = [
+      {
+        field_path   = "tags"
+        array_config = "CONTAINS"
+      },
+      {
+        field_path = "orderNo"
+        order      = "DESCENDING"
+      },
+    ]
+  }
 }
 
 module "storage" {
@@ -50,7 +64,7 @@ module "storage" {
   project_id = var.project_id
   location   = var.bucket_location
   labels     = var.labels
-  name       = "lds-resource-${data.google_project.project.number}"
+  name       = "lds-resource-${data.google_project.project.number}-java"
 }
 
 module "networking" {
@@ -69,8 +83,9 @@ module "firestore" {
   ]
   source = "./modules/firestore"
 
-  project_id = var.project_id
-  init       = var.init
+  project_id        = var.project_id
+  init              = var.init
+  collection_fields = local.collection_fields
 }
 
 resource "random_id" "random_code" {
@@ -82,7 +97,7 @@ resource "google_service_account" "cloudrun" {
     module.project_services,
   ]
 
-  account_id = "cloudrun-${random_id.random_code.hex}"
+  account_id = "cloudrun-${random_id.random_code.hex}-java"
 }
 
 resource "google_project_iam_member" "cloudrun" {
@@ -90,6 +105,7 @@ resource "google_project_iam_member" "cloudrun" {
     "roles/storage.objectAdmin",
     "roles/datastore.user",
     "roles/compute.networkUser",
+    "roles/cloudtrace.agent",
   ])
   project = var.project_id
   role    = each.key
@@ -104,7 +120,7 @@ module "cloud_run_server" {
 
   project_id      = var.project_id
   location        = var.region
-  cloud_run_name  = "lds-server"
+  cloud_run_name  = "lds-server-java"
   cloud_run_image = var.lds_server_image
   limits = {
     cpu    = "2000m"
@@ -137,6 +153,10 @@ module "cloud_run_server" {
       name  = "LDS_RESOURCE_PATH"
       value = "/${local.resource_path}"
     },
+    {
+      name  = "LDS_FIRESTORE"
+      value = "${local.firestore}"
+    },
   ]
   ingress                 = "INGRESS_TRAFFIC_INTERNAL_ONLY"
   vpc_access_connector_id = module.networking.vpc_access_connector_id
@@ -153,7 +173,7 @@ module "cloud_run_client" {
 
   project_id      = var.project_id
   location        = var.region
-  cloud_run_name  = "lds-client"
+  cloud_run_name  = "lds-client-java"
   cloud_run_image = var.lds_client_image
   limits = {
     cpu    = "1000m"
