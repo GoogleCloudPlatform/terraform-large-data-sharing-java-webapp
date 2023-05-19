@@ -3,12 +3,15 @@
 ## Description
 
 ### Tagline
+
 Create a web app to share large quantities of files to users across the globe
 
 ### Detailed
+
 This solution quickly and securely deploys a three-tierd web app with a Javascript front end, a Java back end, and a Firestore database on GCP. The goal of this solution is to utilize Google's Cloud CDN to serve large quantities of files (e.g., images, videos, documents) to users across the globe.
 
 The resources/services/activations/deletions that this module will create/trigger are:
+
 - Cloud Load Balancing
 - Cloud Storage
 - Cloud CDN
@@ -22,8 +25,9 @@ The resources/services/activations/deletions that this module will create/trigge
 |------|-------------|------|---------|:--------:|
 | bucket\_location | Bucket location. https://cloud.google.com/storage/docs/locations | `string` | `"US"` | no |
 | disable\_services\_on\_destroy | Whether project services will be disabled when the resources are destroyed. | `bool` | `false` | no |
-| init | Initialize the Firestore database or not | `bool` | `true` | no |
-| labels | A map of key/value label pairs to assign to the resources. | `map(string)` | <pre>{<br>  "app": "large-data-sharing"<br>}</pre> | no |
+| firestore\_collection\_id | Firestore collection id | `string` | `"fileMetadata-cdn"` | no |
+| init | Initialize resource or not | `bool` | `true` | no |
+| labels | A map of key/value label pairs to assign to the resources. | `map(string)` | <pre>{<br>  "app": "large-data-sharing-java"<br>}</pre> | no |
 | lds\_client\_image | Docker image for frontend | `string` | `"gcr.io/hsa-resources-public/hsa-lds-java-frontend:latest"` | no |
 | lds\_initialization\_archive\_file\_name | Archive file's name in lds-initialization bucket | `string` | `"initialization.tar.gz"` | no |
 | lds\_initialization\_bucket\_name | Bucket for cloud run job | `string` | `"lds-resources-236348946525"` | no |
@@ -35,8 +39,10 @@ The resources/services/activations/deletions that this module will create/trigge
 
 | Name | Description |
 |------|-------------|
+| backend\_bucket\_name | The name of the backend bucket used for Cloud CDN |
 | bucket\_name | Bucket name |
 | lb\_external\_ip | Frontend IP address of the load balancer |
+| neos\_walkthrough\_url | Neos Tutorial URL |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
@@ -56,10 +62,9 @@ The following dependencies must be available:
 - roles/storage.objectAdmin
 - roles/datastore.user
 - roles/compute.networkUser
-    
+
 A service account with the following roles must be used to provision
 the resources of this module:
-
 
 ### APIs
 
