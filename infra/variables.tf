@@ -88,5 +88,5 @@ variable "labels" {
 variable "firestore_collection_id" {
   description = "Firestore collection id"
   type        = string
-  default     = "fileMetadata-cdn-java"
+  default     = "fileMetadata-cdn"
 }
