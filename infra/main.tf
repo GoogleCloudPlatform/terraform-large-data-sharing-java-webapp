@@ -40,9 +40,8 @@ data "google_project" "project" {
 
 locals {
   resource_path = "resource"
-  firestore     = length(var.firestore_collection_id) == 0 ? "fileMetadata-cdn-java" : var.firestore_collection_id
   collection_fields = {
-    "${local.firestore}" = [
+    "${var.firestore_collection_id}-java" = [
       {
         field_path   = "tags"
         array_config = "CONTAINS"
@@ -155,7 +154,7 @@ module "cloud_run_server" {
     },
     {
       name  = "LDS_FIRESTORE"
-      value = "${local.firestore}"
+      value = "${var.firestore_collection_id}-java"
     },
   ]
   ingress                 = "INGRESS_TRAFFIC_INTERNAL_ONLY"
