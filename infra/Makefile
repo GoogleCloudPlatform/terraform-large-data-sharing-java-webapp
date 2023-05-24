@@ -29,7 +29,7 @@ export ENABLE_BPMETADATA
 docker_run:
 	docker run --rm -it \
 		-e SERVICE_ACCOUNT_JSON \
-		-v "$(CURDIR)":/workspace \
+		-v "$(dir ${CURDIR})":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
 		/bin/bash
 
@@ -41,7 +41,7 @@ docker_test_prepare:
 		-e TF_VAR_org_id \
 		-e TF_VAR_folder_id \
 		-e TF_VAR_billing_account \
-		-v "$(CURDIR)":/workspace \
+		-v "$(dir ${CURDIR})":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
 		/usr/local/bin/execute_with_credentials.sh prepare_environment
 
@@ -53,7 +53,7 @@ docker_test_cleanup:
 		-e TF_VAR_org_id \
 		-e TF_VAR_folder_id \
 		-e TF_VAR_billing_account \
-		-v "$(CURDIR)":/workspace \
+		-v "$(dir ${CURDIR})":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
 		/usr/local/bin/execute_with_credentials.sh cleanup_environment
 
@@ -63,7 +63,7 @@ docker_test_lint:
 	docker run --rm -it \
 		-e ENABLE_BPMETADATA \
 		-e EXCLUDE_LINT_DIRS \
-		-v "$(CURDIR)":/workspace \
+		-v "$(dir ${CURDIR})":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
 		/usr/local/bin/test_lint.sh
 
