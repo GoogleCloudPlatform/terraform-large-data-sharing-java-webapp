@@ -27,7 +27,7 @@ export ENABLE_BPMETADATA
 # Enter docker container for local development
 .PHONY: docker_run
 docker_run:
-	docker run --rm -it \
+	docker run --pull always --rm -it \
 		-e SERVICE_ACCOUNT_JSON \
 		-v "$(dir ${CURDIR})":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
@@ -36,7 +36,7 @@ docker_run:
 # Execute prepare tests within the docker container
 .PHONY: docker_test_prepare
 docker_test_prepare:
-	docker run --rm -it \
+	docker run --pull always --rm -it \
 		-e SERVICE_ACCOUNT_JSON \
 		-e TF_VAR_org_id \
 		-e TF_VAR_folder_id \
@@ -48,7 +48,7 @@ docker_test_prepare:
 # Clean up test environment within the docker container
 .PHONY: docker_test_cleanup
 docker_test_cleanup:
-	docker run --rm -it \
+	docker run --pull always --rm -it \
 		-e SERVICE_ACCOUNT_JSON \
 		-e TF_VAR_org_id \
 		-e TF_VAR_folder_id \
@@ -60,7 +60,7 @@ docker_test_cleanup:
 # Execute lint tests within the docker container
 .PHONY: docker_test_lint
 docker_test_lint:
-	docker run --rm -it \
+	docker run --pull always --rm -it \
 		-e ENABLE_BPMETADATA \
 		-e EXCLUDE_LINT_DIRS \
 		-v "$(dir ${CURDIR})":/workspace \
@@ -70,7 +70,7 @@ docker_test_lint:
 # Execute lint tests non tty within the docker container
 .PHONY: docker_test_lint_gha
 docker_test_lint_gha:
-	docker run --rm \
+	docker run --pull always --rm \
 		-e EXCLUDE_LINT_DIRS \
 		-v "$(CURDIR)":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
@@ -79,7 +79,7 @@ docker_test_lint_gha:
 # Generate documentation
 .PHONY: docker_generate_docs
 docker_generate_docs:
-	docker run --rm -it \
+	docker run --pull always --rm -it \
 		-e ENABLE_BPMETADATA \
 		-v "$(dir ${CURDIR})":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
