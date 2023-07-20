@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.1](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/compare/v0.1.0...v0.1.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/googlecloudplatform/cloud-foundation-toolkit/infra/blueprint-test to v0.6.1 ([#32](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/issues/32)) ([f39e217](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/commit/f39e2179146f8680f2ecddc59ab401bc9f160221))
+* Update iam.tf reducing SA roles ([#23](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/issues/23)) ([8d23168](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/commit/8d2316891ef8c21c04908d62f01dafd6ac58203e))
+* updates all make targets ([#21](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/issues/21)) ([6fa7ffd](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/commit/6fa7ffd2d5871a1c8adfbe337f9331b9f72b41c1))
+
 ## 0.1.0 (2023-06-22)
 
 
