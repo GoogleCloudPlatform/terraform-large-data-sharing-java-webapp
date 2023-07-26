@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/compare/v0.1.1...v0.1.2) (2023-07-26)
+
+
+### Bug Fixes
+
+* pinning google provider &lt; 4.75.0 ([#39](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/issues/39)) ([edceb54](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/commit/edceb5452623558caa95ec98f4246232dad43144))
+
 ## [0.1.1](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/compare/v0.1.0...v0.1.1) (2023-07-20)
 
 
