@@ -68,7 +68,7 @@ spec:
     - name: lds_client_image
       description: Docker image for frontend
       varType: string
-      defaultValue: gcr.io/hsa-resources-public/hsa-lds-java-frontend:latest
+      defaultValue: gcr.io/hsa-public/hsa-lds-java-frontend:latest
     - name: lds_initialization_archive_file_name
       description: Archive file's name in lds-initialization bucket
       varType: string
@@ -80,7 +80,7 @@ spec:
     - name: lds_server_image
       description: Docker image for backend
       varType: string
-      defaultValue: gcr.io/hsa-resources-public/hsa-lds-java-backend:latest
+      defaultValue: gcr.io/hsa-public/hsa-lds-java-backend:latest
     - name: project_id
       description: GCP project ID.
       varType: string
