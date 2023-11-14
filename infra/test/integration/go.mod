@@ -1,6 +1,6 @@
 module github.com/HSA-Integration/terraform-large-data-sharing-java-webapp/infra/test/integration
 
-go 1.20
+go 1.20.11
 
 require (
 	github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test v0.8.1
