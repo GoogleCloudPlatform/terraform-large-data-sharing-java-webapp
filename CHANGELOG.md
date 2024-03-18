@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/compare/v0.1.2...v0.1.3) (2024-01-10)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/googlecloudplatform/cloud-foundation-toolkit/infra/blueprint-test to v0.8.1 ([#43](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/issues/43)) ([5e580e1](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/commit/5e580e1af94bdba24dd2b5698988d39279420e15))
+
 ## [0.1.2](https://github.com/GoogleCloudPlatform/terraform-large-data-sharing-java-webapp/compare/v0.1.1...v0.1.2) (2023-07-26)
 
 
